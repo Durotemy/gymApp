@@ -6,7 +6,7 @@ import Exercises from "../components/Exercises";
 
 const Home = () => {
     const [exercises, setExercises] = useState([]);
-    const [bodyPart, setBodyParts] = useState('all');
+    const [bodyPart, setBodyPart] = useState('all');
 
     return (
         <Box>
@@ -14,11 +14,12 @@ const Home = () => {
             <SearchExercises
                 setExercises={setExercises}
                 bodyPart={bodyPart}
-                setBodyParts={setBodyParts} />
+                setBodyPart={setBodyPart} />
             <Exercises
                 setExercises={setExercises}
                 bodyPart={bodyPart}
-                setBodyParts={setBodyParts}
+                setBodyPart={setBodyPart}
+                exercises={exercises} 
             />
         </Box>
     )
