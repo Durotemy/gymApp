@@ -30,7 +30,7 @@ const HeroBanner = () => {
             >
                 Exercises
             </Typography>
-            <Button href="#exercise" variant="contained" color="error" sx={{ backgroundColor: "#ff2625", padding: "10px" }}>Explore exercises</Button>
+            <Button href="#exercises" variant="contained" color="error" sx={{ backgroundColor: "#ff2625", padding: "10px" }}>Explore exercises</Button>
             <img src={Herobanner} alt="banner" className="hero-banner-img" />
         </Box>
     )
