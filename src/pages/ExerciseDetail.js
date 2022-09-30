@@ -9,9 +9,7 @@ const ExerciseDetail = ({ exercises, setExercises, bodyPart }) => {
             sx={{ mt: { lg: "100px" } }}
             mt="50px"
         >
-            <Typography variant="h4">
-                Showing Results for {bodyPart}
-            </Typography>
+            
         </Box>
     )
 }
