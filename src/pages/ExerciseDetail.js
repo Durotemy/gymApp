@@ -1,23 +1,46 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Stack, Typography } from "@mui/material";
-import { exerciseOptions, fetchData } from "../utils/fetchData";
+import { Box } from "@mui/material";
+import { exerciseOptions, fetchData, youtubeOptions } from "../utils/fetchData";
 import ExerciseVideos from '../components/ExerciseVideos';
 import SimilarExercises from '../components/SimilarExercises';
-import Details from '../components/Detail';
+import Detail from '../components/Detail';
 
-const ExerciseDetail = ({ exercises, setExercises, bodyPart }) => {
+const ExerciseDetail = () => {
+    const { id } = useParams();
+    const [exerciseDetail, setExerciseDetail] = useState({});
+    const [exerciseVideos, setExerciseVideos] = useState([]);
+    const [targetMuscleExercises, setTargetMuscleExercises] = useState([]);
+    const [equipmentExercises, setEquipmentExercises] = useState([])
+
+    useEffect(() => {
+
+        const fetchExerciseDetail = async () => {
+            const exerciseDbUrl = 'https://exercisedb.p.rapidapi.com';
+            const youtubeSearchUrl = 'https://youtube-search-and-download.p.rapidapi.com';
+
+            const exerciseDetailData = await fetchData(`${exerciseDbUrl}/exercises/exercise/${id}`, exerciseOptions);
+            setExerciseDetail(exerciseDetailData);
+
+            const exerciseVideosData = await fetchData(`${youtubeSearchUrl}/search?query=${exerciseDetailData.name} exercise`, youtubeOptions);
+            setExerciseVideos(exerciseVideosData.contents);
+
+            const targetMuscleExercisesData = await fetchData(`${exerciseDbUrl}/exercises/target/${exerciseDetailData.target}`, exerciseOptions);
+            setTargetMuscleExercises(targetMuscleExercisesData);
+
+            const equimentExercisesData = await fetchData(`${exerciseDbUrl}/exercises/equipment/${exerciseDetailData.equipment}`, exerciseOptions);
+            setEquipmentExercises(equimentExercisesData);
+        }
+
+        fetchExerciseDetail();
+
+    }, [id])
+
+
     return (
-        <Box id="exercises"
-            sx={{ mt: { lg: "100px" } }}
-            mt="50px"
-        >
-            <Details />
-            <ExerciseVideos />
-            <SimilarExercises />
-
+        <Box sx={{ mt: { lg: '96px', xs: '60px' } }}>
+            <Detail exerciseDetail={exerciseDetail} />
         </Box>
     )
 }
-
 export default ExerciseDetail;
