@@ -9,7 +9,6 @@ const ExerciseDetail = () => {
     const [exerciseDetail, setExerciseDetail] = useState({});
 
     useEffect(() => {
-
         const fetchExerciseDetail = async () => {
             const exerciseDbUrl = 'https://exercisedb.p.rapidapi.com';
             const exerciseDetailData = await fetchData(`${exerciseDbUrl}/exercises/exercise/${id}`, exerciseOptions);
