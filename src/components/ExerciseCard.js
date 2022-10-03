@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { Button, Card, CardActions, CardContent, CardMedia, Typography, Stack } from '@mui/material';
+import { Button, Typography, Stack } from '@mui/material';
 
 const ExerciseCard = ({ exercise }) => {
     return (
